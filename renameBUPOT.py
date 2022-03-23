@@ -8,6 +8,13 @@ pathToPdfs = os.getcwd()+"/dropPdfHere/"
 # year = input("What year is this BUPOT? Eg: 2021, 2022 etc")
 # month = input("What month is this BUPOT? Eg: 01,05,12 etc")
 
+def printText(list_of_texts):
+    counter = 0
+    for text in list_of_texts:
+        print(counter)
+        print(text)
+        counter += 1
+
 for _, _, files in os.walk(pathToPdfs):
     for filename in files:
         if '.pdf' in filename:
@@ -22,9 +29,11 @@ for _, _, files in os.walk(pathToPdfs):
             masa_pajak = list_of_texts[24].split(' ')[0]
             month = "{:02d}".format(int(masa_pajak.split('-')[0])) # make the month has leading 0 if single digit
             year = masa_pajak.split('-')[1]
+            entity = list_of_texts[33].split('Wajib Pajak : ')[-1]
 
+            # printText(list_of_texts)
             old_file_directory = pathToPdfs + filename
-            new_name = year + '-' + month + '-' + bupot + '.pdf'
+            new_name = year + '-' + month + '-' + bupot + '-' + entity+'.pdf'
             new_file_directory = pathToPdfs + new_name
 
             pdf.close()
