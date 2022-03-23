@@ -30,4 +30,4 @@ for _, _, files in os.walk(pathToPdfs):
             pdf.close()
             
             os.rename(old_file_directory, new_file_directory)
-            print ("Renaming " + filename + " to " + new_name)
+            print ("Success! " + filename + " has been renamed to " + new_name)
