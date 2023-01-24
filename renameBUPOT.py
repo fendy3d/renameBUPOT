@@ -9,7 +9,7 @@ userUnderstand = input("\n!!! WARNING !!!\nPlease make sure that all pdf in the 
 while userUnderstand != 'y':
     userUnderstand = input("\n!!! I REPEAT !!!\nPlease make sure that all pdf in the folder are ALL OF THE SAME TYPE.\nPress 'y' if you have done this.")    
 
-typeOfBupot = input("What BUPOT is this? Press\n'1' for pph 21/26 Formulir 1721-VI\n'2' for pph 21/26 Formulir 1721-A1\n'3' for pph 4/15/22/23\nAnswer: ")
+typeOfBupot = input("What BUPOT is this? Press\n'1' for pph 21/26 Formulir 1721-VI\n'2' for pph 21/26 Formulir 1721-A1\n'3' for pph 4/15/22/23\n'4' for pph 23 Formulir 1724 - III\nAnswer: ")
 
 def printText(list_of_texts):
     counter = 0
@@ -20,7 +20,7 @@ def printText(list_of_texts):
 for _, _, files in os.walk(pathToPdfs):
     for filename in files:
         if '.pdf' in filename:
-            print ("Renaming " + filename)
+            print ("Old name: " + filename)
             
             pdf = pdfplumber.open(pathToPdfs + filename)
             page = pdf.pages[0] # get the page
@@ -75,8 +75,21 @@ for _, _, files in os.walk(pathToPdfs):
                 new_file_directory = pathToPdfs + new_name
                 
                 os.rename(old_file_directory, new_file_directory)
+            
+            elif (typeOfBupot == '4'): # if it's pph 23 (FORM 1724 - III)
                 
+                masa_pajak = list_of_texts[25].split(' ')[0]
+                nomor_bupot = list_of_texts[6].split(' : ')[-1]
+                month, year = masa_pajak.split('-')
+                month = "{:02d}".format(int(month)) # make the month has leading 0 if single digit
+                name = list_of_texts[13].split(': ')[-1]
+
+                pdf.close()
+                old_file_directory = pathToPdfs + filename
+                new_name = name + '-PPH23BUPOT-' + year + '-' + month + '-' + nomor_bupot + '.pdf'
+                new_file_directory = pathToPdfs + new_name
+                os.rename(old_file_directory, new_file_directory)
             
             pdf.close()
+            print ("Success! New name: " + new_name)
             
-            # print ("Success! " + filename + " has been renamed to " + new_name)
