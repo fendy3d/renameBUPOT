@@ -71,7 +71,7 @@ for _, _, files in os.walk(pathToPdfs):
 
                 pdf.close()
                 old_file_directory = pathToPdfs + filename
-                new_name = year + '-' + month + '-' + nomor_bupot + '-' + entity +'.pdf'
+                new_name = entity + '-' + year + '-' + month + '-' + nomor_bupot+ '.pdf'
                 new_file_directory = pathToPdfs + new_name
                 
                 os.rename(old_file_directory, new_file_directory)
