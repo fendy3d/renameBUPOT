@@ -28,112 +28,110 @@ for _, _, files in os.walk(pathToPdfs):
             list_of_texts = texts.split('\n')
             
             printText(list_of_texts)
-            # if (typeOfBupot == '1'): # if it's pph 21/26 (Tidak Final)
+            if (typeOfBupot == '1'): # if it's pph 21/26 (Tidak Final)
+                nomor = list_of_texts[0].replace(" ", "-")
+                name = list_of_texts[2]
 
-            #     masa_pajak = list_of_texts[0].split(' ')
-            #     month = "{:02d}".format(int(masa_pajak[0])) # make the month has leading 0 if single digit
-            #     year = '20' + masa_pajak[1]
-            #     name = list_of_texts[2]
+                pdf.close()
 
-            #     pdf.close()
-            #     old_file_directory = pathToPdfs + filename
-            #     new_name = name + '-PPH21BUPOT-' + year + '-' + month + '.pdf'
-            #     new_file_directory = pathToPdfs + new_name
-            #     os.rename(old_file_directory, new_file_directory)
+                old_file_directory = pathToPdfs + filename
+                new_name = name + '-PPH21BUPOT-' + nomor + '.pdf'
+                new_file_directory = pathToPdfs + new_name
+                os.rename(old_file_directory, new_file_directory)
 
-            # elif (typeOfBupot == '2'): # if it's pph 21/26 (Pegawai Tetap)
+            elif (typeOfBupot == '2'): # if it's pph 21/26 (Pegawai Tetap)
+                nomor = list_of_texts[0].split(' ')[0] + '-' + list_of_texts[0].split(' ')[1] + '-' + list_of_texts[0].split(' ')[2]
+                name = list_of_texts[5].split(' ')[0]
 
-            #     year = '20' + list_of_texts[0].split(' ')[1]
-            #     name = list_of_texts[5].split(' ')[0]
+                pdf.close()
 
-            #     pdf.close()
-            #     old_file_directory = pathToPdfs + filename
-            #     new_name = name + '-PPH21BUPOT-' + year + '.pdf'
-            #     new_file_directory = pathToPdfs + new_name
-            #     os.rename(old_file_directory, new_file_directory)
+                old_file_directory = pathToPdfs + filename
+                new_name = name + '-PPH21BUPOT-' + nomor + '.pdf'
+                new_file_directory = pathToPdfs + new_name
+                os.rename(old_file_directory, new_file_directory)
 
-            # elif (typeOfBupot == '3'): # if it's pph 4/15/22/23
+            elif (typeOfBupot == '3'): # if it's pph 4/15/22/23
 
-            #     entity_code = 2 # Entity code: 1 (for old BUPOT), 2 (for new BUPOT)
-            #     if(entity_code == 1):
-            #         nomor_bupot = list_of_texts[6].split(':')[-1]
-            #         masa_pajak = list_of_texts[24].split(' ')[0]
-            #         month = "{:02d}".format(int(masa_pajak.split('-')[0])) # make the month has leading 0 if single digit
-            #         year = masa_pajak.split('-')[1]
-            #         entity = list_of_texts[33].split('Wajib Pajak : ')[-1]
+                entity_code = 2 # Entity code: 1 (for old BUPOT), 2 (for new BUPOT)
+                if(entity_code == 1):
+                    nomor_bupot = list_of_texts[6].split(':')[-1]
+                    masa_pajak = list_of_texts[24].split(' ')[0]
+                    month = "{:02d}".format(int(masa_pajak.split('-')[0])) # make the month has leading 0 if single digit
+                    year = masa_pajak.split('-')[1]
+                    entity = list_of_texts[33].split('Wajib Pajak : ')[-1]
 
-            #     elif(entity_code == 2):
-            #         nomor_bupot = list_of_texts[4].split(':')[-1].split(" H.4")[0].replace(" ", "")
-            #         masa_pajak = list_of_texts[15].split(' ')[0]
-            #         month, year = masa_pajak.split('-')
-            #         month = "{:02d}".format(int(month)) # make the month has leading 0 if single digit
-            #         entity = list_of_texts[10].split(' : ')[-1]
+                elif(entity_code == 2):
+                    nomor_bupot = list_of_texts[4].split(':')[-1].split(" H.4")[0].replace(" ", "")
+                    masa_pajak = list_of_texts[15].split(' ')[0]
+                    month, year = masa_pajak.split('-')
+                    month = "{:02d}".format(int(month)) # make the month has leading 0 if single digit
+                    entity = list_of_texts[10].split(' : ')[-1]
 
-            #     pdf.close()
-            #     old_file_directory = pathToPdfs + filename
-            #     new_name = entity + '-' + year + '-' + month + '-' + nomor_bupot+ '.pdf'
-            #     new_file_directory = pathToPdfs + new_name
+                pdf.close()
+                old_file_directory = pathToPdfs + filename
+                new_name = entity + '-' + year + '-' + month + '-' + nomor_bupot+ '.pdf'
+                new_file_directory = pathToPdfs + new_name
                 
-            #     os.rename(old_file_directory, new_file_directory)
+                os.rename(old_file_directory, new_file_directory)
             
-            # elif (typeOfBupot == '4'): # if it's pph 23 (FORM 1724 - III) - 2022 format
+            elif (typeOfBupot == '4'): # if it's pph 23 (FORM 1724 - III) - 2022 format
                 
-            #     masa_pajak = list_of_texts[25].split(' ')[0]
-            #     nomor_bupot = list_of_texts[6].split(' : ')[-1]
-            #     month, year = masa_pajak.split('-')
-            #     month = "{:02d}".format(int(month)) # make the month has leading 0 if single digit
-            #     name = list_of_texts[13].split(': ')[-1]
+                masa_pajak = list_of_texts[25].split(' ')[0]
+                nomor_bupot = list_of_texts[6].split(' : ')[-1]
+                month, year = masa_pajak.split('-')
+                month = "{:02d}".format(int(month)) # make the month has leading 0 if single digit
+                name = list_of_texts[13].split(': ')[-1]
 
-            #     pdf.close()
-            #     old_file_directory = pathToPdfs + filename
-            #     new_name = name + '-PPH23BUPOT-' + year + '-' + month + '-' + nomor_bupot + '.pdf'
-            #     new_file_directory = pathToPdfs + new_name
-            #     os.rename(old_file_directory, new_file_directory)
+                pdf.close()
+                old_file_directory = pathToPdfs + filename
+                new_name = name + '-PPH23BUPOT-' + year + '-' + month + '-' + nomor_bupot + '.pdf'
+                new_file_directory = pathToPdfs + new_name
+                os.rename(old_file_directory, new_file_directory)
 
-            # elif (typeOfBupot == '5'): # if it's pph 23 (FORM 1724 - III) - 2021 format
+            elif (typeOfBupot == '5'): # if it's pph 23 (FORM 1724 - III) - 2021 format
                 
-            #     masa_pajak = list_of_texts[24].split(' ')[0]
-            #     nomor_bupot = list_of_texts[6].split(':')[-1]
-            #     month, year = masa_pajak.split('-')
-            #     month = "{:02d}".format(int(month)) # make the month has leading 0 if single digit
-            #     name = list_of_texts[12].split(': ')[-1]
+                masa_pajak = list_of_texts[24].split(' ')[0]
+                nomor_bupot = list_of_texts[6].split(':')[-1]
+                month, year = masa_pajak.split('-')
+                month = "{:02d}".format(int(month)) # make the month has leading 0 if single digit
+                name = list_of_texts[12].split(': ')[-1]
 
-            #     pdf.close()
-            #     old_file_directory = pathToPdfs + filename
-            #     new_name = name + '-PPH23BUPOT-' + year + '-' + month + '-' + nomor_bupot + '.pdf'
-            #     new_file_directory = pathToPdfs + new_name
-            #     os.rename(old_file_directory, new_file_directory)
+                pdf.close()
+                old_file_directory = pathToPdfs + filename
+                new_name = name + '-PPH23BUPOT-' + year + '-' + month + '-' + nomor_bupot + '.pdf'
+                new_file_directory = pathToPdfs + new_name
+                os.rename(old_file_directory, new_file_directory)
 
-            # elif (typeOfBupot == '6'): # if it's Formulir BPBS
+            elif (typeOfBupot == '6'): # if it's Formulir BPBS
                 
-            #     masa_pajak = list_of_texts[15].split(' ')[0]
-            #     nomor_bupot = list_of_texts[4].split(': ')[-1].split(' H')[0].replace(' ', '')
-            #     month, year = masa_pajak.split('-')
-            #     month = "{:02d}".format(int(month)) # make the month has leading 0 if single digit
-            #     name = list_of_texts[28].split(': ')[-1]
-            #     firstTwelveLettersOfName = name.replace(' ','')[:12]
+                masa_pajak = list_of_texts[15].split(' ')[0]
+                nomor_bupot = list_of_texts[4].split(': ')[-1].split(' H')[0].replace(' ', '')
+                month, year = masa_pajak.split('-')
+                month = "{:02d}".format(int(month)) # make the month has leading 0 if single digit
+                name = list_of_texts[28].split(': ')[-1]
+                firstTwelveLettersOfName = name.replace(' ','')[:12]
                 
-            #     pdf.close()
-            #     old_file_directory = pathToPdfs + filename
-            #     new_name = firstTwelveLettersOfName + '-PPH23BUPOT-' + year + '-' + month + '-' + nomor_bupot + '.pdf'
-            #     new_file_directory = pathToPdfs + new_name
-            #     os.rename(old_file_directory, new_file_directory)
+                pdf.close()
+                old_file_directory = pathToPdfs + filename
+                new_name = firstTwelveLettersOfName + '-PPH23BUPOT-' + year + '-' + month + '-' + nomor_bupot + '.pdf'
+                new_file_directory = pathToPdfs + new_name
+                os.rename(old_file_directory, new_file_directory)
 
-            # elif (typeOfBupot == '7'): # if it's Formulir BPBS (text overflows)
+            elif (typeOfBupot == '7'): # if it's Formulir BPBS (text overflows)
                 
-            #     masa_pajak = list_of_texts[17].split(' ')[0]
-            #     nomor_bupot = list_of_texts[4].split(': ')[-1].split(' H')[0].replace(' ', '')
-            #     month, year = masa_pajak.split('-')
-            #     month = "{:02d}".format(int(month)) # make the month has leading 0 if single digit
-            #     name = list_of_texts[30].split(': ')[-1]
-            #     firstTwelveLettersOfName = name.replace(' ','')[:12]
+                masa_pajak = list_of_texts[17].split(' ')[0]
+                nomor_bupot = list_of_texts[4].split(': ')[-1].split(' H')[0].replace(' ', '')
+                month, year = masa_pajak.split('-')
+                month = "{:02d}".format(int(month)) # make the month has leading 0 if single digit
+                name = list_of_texts[30].split(': ')[-1]
+                firstTwelveLettersOfName = name.replace(' ','')[:12]
                 
-            #     pdf.close()
-            #     old_file_directory = pathToPdfs + filename
-            #     new_name = firstTwelveLettersOfName + '-PPH23BUPOT-' + year + '-' + month + '-' + nomor_bupot + '.pdf'
-            #     new_file_directory = pathToPdfs + new_name
-            #     os.rename(old_file_directory, new_file_directory)
+                pdf.close()
+                old_file_directory = pathToPdfs + filename
+                new_name = firstTwelveLettersOfName + '-PPH23BUPOT-' + year + '-' + month + '-' + nomor_bupot + '.pdf'
+                new_file_directory = pathToPdfs + new_name
+                os.rename(old_file_directory, new_file_directory)
             
-            # pdf.close()
-            # print ("Success! New name: " + new_name)
+            pdf.close()
+            print ("Success! New name: " + new_name)
             
