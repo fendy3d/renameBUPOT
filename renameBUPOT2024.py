@@ -9,7 +9,7 @@ userUnderstand = input("\n!!! WARNING !!!\nPlease make sure that all pdf in the 
 while userUnderstand != 'y':
     userUnderstand = input("\n!!! I REPEAT !!!\nPlease make sure that all pdf in the folder are ALL OF THE SAME TYPE.\nPress 'y' if you have done this.")    
 
-typeOfBupot = input("What BUPOT is this? Press\n'1' for pph 21/26 Formulir 1721-VI\n'2' for pph 21/26 Formulir 1721-A1\n'3' for pph 4/15/22/23\n'4' for pph 23 Formulir 1724 - III\n'5' for pph 23 Formulir 1724 - III (version2)\n'6' for Formulir BPBS\n'7' for Formulir BPBS(text overflows)\n'8' for FORMULIR 1721 - VIII\nAnswer: ")
+typeOfBupot = input("What BUPOT is this? Press\n'1' for pph 21/26 Formulir 1721-VI\n'2' for pph 21/26 Formulir 1721-A1\n'3' for pph 4/15/22/23\n'4' for pph 23 Formulir 1724 - III\n'5' for pph 23 Formulir 1724 - III (version2)\n'6' for Formulir BPBS (has 'areastaples')\n'7' for Formulir BPBS(text overflows)\n'8' for FORMULIR 1721 - VIII\n'9' for FORMULIR BPBS (does not have 'areastaples')\nAnswer: ")
 
 def printText(list_of_texts):
     counter = 0
@@ -117,7 +117,8 @@ for _, _, files in os.walk(pathToPdfs):
                 
                 pdf.close()
                 old_file_directory = pathToPdfs + filename
-                new_name = firstTwelveLettersOfName + '-PPH4(2)BUPOT-' + year + '-' + month + '-' + nomor_bupot + '.pdf'
+                # new_name = firstTwelveLettersOfName + '-PPH4(2)BUPOT-' + year + '-' + month + '-' + nomor_bupot + '.pdf'
+                new_name = firstTwelveLettersOfName + "_" +kode_pajak + "_" + year + '-' + month + '-' + nomor_bupot + '.pdf'
                 new_file_directory = pathToPdfs + new_name
                 os.rename(old_file_directory, new_file_directory)
 
@@ -133,7 +134,8 @@ for _, _, files in os.walk(pathToPdfs):
                 
                 pdf.close()
                 old_file_directory = pathToPdfs + filename
-                new_name = firstTwelveLettersOfName + '-PPH4(2)BUPOT-' + year + '-' + month + '-' + nomor_bupot + '.pdf'
+                # new_name = firstTwelveLettersOfName + '-PPH4(2)BUPOT-' + year + '-' + month + '-' + nomor_bupot + '.pdf'
+                new_name = firstTwelveLettersOfName + "_" +kode_pajak + "_" + year + '-' + month + '-' + nomor_bupot + '.pdf'
                 new_file_directory = pathToPdfs + new_name
                 os.rename(old_file_directory, new_file_directory)
             
@@ -151,6 +153,22 @@ for _, _, files in os.walk(pathToPdfs):
 
                 os.rename(old_file_directory, new_file_directory)
             
+            elif (typeOfBupot == '9'): # if it's Formulir BPBS version 2
+                
+                masa_pajak = list_of_texts[14].split(' ')[0]
+                kode_pajak = list_of_texts[14].split(' ')[1]
+                nomor_bupot = list_of_texts[3].split(': ')[-1].split(' H')[0].replace(' ', '')
+                month, year = masa_pajak.split('-')
+                month = "{:02d}".format(int(month)) # make the month has leading 0 if single digit
+                name = list_of_texts[8].split(': ')[-1]
+                firstTwelveLettersOfName = name.replace(' ','')[:12]
+                
+                pdf.close()
+                old_file_directory = pathToPdfs + filename
+                new_name = firstTwelveLettersOfName + "_" +kode_pajak + "_" + year + '-' + month + '-' + nomor_bupot + '.pdf'
+                new_file_directory = pathToPdfs + new_name
+                os.rename(old_file_directory, new_file_directory)
+
             else:
                 print ("Code not updated yet. Contact Fendy.")
             
