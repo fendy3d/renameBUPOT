@@ -109,6 +109,7 @@ for _, _, files in os.walk(pathToPdfs):
             elif (typeOfBupot == '6'): # if it's Formulir BPBS
                 
                 masa_pajak = list_of_texts[15].split(' ')[0]
+                kode_pajak = list_of_texts[15].split(' ')[1]
                 nomor_bupot = list_of_texts[4].split(': ')[-1].split(' H')[0].replace(' ', '')
                 month, year = masa_pajak.split('-')
                 month = "{:02d}".format(int(month)) # make the month has leading 0 if single digit
@@ -125,6 +126,7 @@ for _, _, files in os.walk(pathToPdfs):
             elif (typeOfBupot == '7'): # if it's Formulir BPBS (text overflows)
                 
                 masa_pajak = list_of_texts[17].split(' ')[0]
+                kode_pajak = list_of_texts[17].split(' ')[1]
                 nomor_bupot = list_of_texts[4].split(': ')[-1].split(' H')[0].replace(' ', '')
                 month, year = masa_pajak.split('-')
                 month = "{:02d}".format(int(month)) # make the month has leading 0 if single digit
