@@ -9,7 +9,7 @@ userUnderstand = input("\n!!! WARNING !!!\nPlease make sure that all pdf in the 
 while userUnderstand != 'y':
     userUnderstand = input("\n!!! I REPEAT !!!\nPlease make sure that all pdf in the folder are ALL OF THE SAME TYPE.\nPress 'y' if you have done this.")    
 
-typeOfBupot = input("What BUPOT is this? Press\n'1' for pph 21/26 Formulir 1721-VI\n'2' for pph 21/26 Formulir 1721-A1\n'3' for pph 4/15/22/23\n'4' for pph 23 Formulir 1724 - III\n'5' for pph 23 Formulir 1724 - III (version2)\n'6' for Formulir BPBS (has 'areastaples')\n'7' for Formulir BPBS(text overflows)\n'8' for FORMULIR 1721 - VIII\n'9' for FORMULIR BPBS (does not have 'areastaples' at the top left corner)\nAnswer: ")
+typeOfBupot = input("What BUPOT is this? Press\n'1' for pph 21/26 Formulir 1721-VI\n'2' for pph 21/26 Formulir 1721-A1\n'3' for pph 4/15/22/23\n'4' for pph 23 Formulir 1724 - III\n'5' for pph 23 Formulir 1724 - III (version2)\n'6' for Formulir BPBS (has 'areastaples')\n'7' for Formulir BPBS(text overflows)\n'8' for FORMULIR 1721 - VIII\n'9' for FORMULIR BPBS (does not have 'areastaples')\nAnswer: ")
 
 def printText(list_of_texts):
     counter = 0
@@ -20,7 +20,7 @@ def printText(list_of_texts):
 for _, _, files in os.walk(pathToPdfs):
     for filename in files:
         if '.pdf' in filename:
-            print ("Old name: " + filename)
+            # print ("Old name: " + filename)
             
             pdf = pdfplumber.open(pathToPdfs + filename)
             page = pdf.pages[0] # get the page
@@ -34,7 +34,7 @@ for _, _, files in os.walk(pathToPdfs):
                 month = masa_pajak[0]
                 year = masa_pajak[1]
                 
-                name = list_of_texts[10].split(': ')[-1]
+                name = list_of_texts[11].split(': ')[-1]
                 
                 pdf.close()
                 old_file_directory = pathToPdfs + filename
@@ -155,7 +155,7 @@ for _, _, files in os.walk(pathToPdfs):
 
                 os.rename(old_file_directory, new_file_directory)
             
-            elif (typeOfBupot == '9'): # if it's FORMULIR BPBS (does not have 'areastaples' at the top left corner)
+            elif (typeOfBupot == '9'): # if it's Formulir BPBS version 2
                 
                 masa_pajak = list_of_texts[14].split(' ')[0]
                 kode_pajak = list_of_texts[14].split(' ')[1]
@@ -175,6 +175,4 @@ for _, _, files in os.walk(pathToPdfs):
                 print ("Code not updated yet. Contact Fendy.")
             
             pdf.close()
-            print("XXXXXXX: " + name)
-            print ("Success! New name: " + new_name)
-            
+            print (new_name)
