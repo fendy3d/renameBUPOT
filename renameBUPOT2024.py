@@ -196,11 +196,12 @@ for _, _, files in os.walk(pathToPdfs):
                 month, year = masa_pajak.split(' - ')
                 month = "{:02d}".format(int(month)) # make the month has leading 0 if single digit
                 name = list_of_texts[8].split(': ')[-1]
-                firstTwelveLettersOfName = name.replace(' ','')[:12]
+                # firstTwelveLettersOfName = name.replace(' ','')[:12]
                 
                 pdf.close()
                 old_file_directory = pathToPdfs + filename
-                new_name = firstTwelveLettersOfName + "_" +kode_pajak + "_" + year + '-' + month + '-' + nomor_bupot + '.pdf'
+                # new_name = firstTwelveLettersOfName + "_" +kode_pajak + "_" + year + '-' + month + '-' + nomor_bupot + '.pdf'
+                new_name = name + "_" +kode_pajak + "_" + year + '-' + month + '-' + nomor_bupot + '.pdf'
                 new_file_directory = pathToPdfs + new_name
                 os.rename(old_file_directory, new_file_directory)
             else:
