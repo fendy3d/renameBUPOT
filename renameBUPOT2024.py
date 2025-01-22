@@ -43,11 +43,10 @@ def month_name_to_number(month_name):
 for _, _, files in os.walk(pathToPdfs):
     for filename in files:
         if '.pdf' in filename:
-            # print ("Old name: " + filename)
             
             pdf = pdfplumber.open(pathToPdfs + filename)
             num_pages = len(pdf.pages)
-            
+            list_of_texts = []
             # printText(list_of_texts)
             if (typeOfBupot == '1'): # if it's pph 21/26 (Tidak Final)
                 
@@ -282,7 +281,7 @@ for _, _, files in os.walk(pathToPdfs):
                 os.rename(old_file_directory, new_file_directory)
 
             elif (typeOfBupot == '12'): # if it's FPK (2025 onwards)
-                list_of_texts = []
+                
                 for page_number in range(num_pages):
                     page = pdf.pages[page_number] # get the page
                     texts = page.extract_text()
