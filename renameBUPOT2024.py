@@ -47,7 +47,7 @@ for _, _, files in os.walk(pathToPdfs):
             pdf = pdfplumber.open(pathToPdfs + filename)
             num_pages = len(pdf.pages)
             list_of_texts = []
-            # printText(list_of_texts)
+            
             if (typeOfBupot == '1'): # if it's pph 21/26 (Tidak Final)
                 
                 for page_number in range(num_pages):
@@ -61,7 +61,7 @@ for _, _, files in os.walk(pathToPdfs):
                 
                 name = list_of_texts[11].split(': ')[-1]
                 
-                pdf.close()
+                
                 old_file_directory = pathToPdfs + filename
                 new_name = name + '-PPH21BUPOT-' + year + '-' + month + '.pdf'
                 new_file_directory = pathToPdfs + new_name
@@ -75,12 +75,13 @@ for _, _, files in os.walk(pathToPdfs):
                     texts = page.extract_text()
                     list_of_texts += texts.split('\n')
 
-                year = '20' + list_of_texts[0].split(' ')[1]
-                name = list_of_texts[5].split(' ')[0]
-
-                pdf.close()
+                masa = list_of_texts[6].split(' ')[-1]
+                year = masa.split('/')[-1]
+                month = masa.split('-')[1][:2]
+                name = list_of_texts[18].split('A.03')[-1].split(' 9    ')[0]
+                
                 old_file_directory = pathToPdfs + filename
-                new_name = name + '-PPH21BUPOT-' + year + '.pdf'
+                new_name = name + '-PPH21BUPOT-' + year + '-' + month + '.pdf'
                 new_file_directory = pathToPdfs + new_name
                 os.rename(old_file_directory, new_file_directory)
 
@@ -106,7 +107,7 @@ for _, _, files in os.walk(pathToPdfs):
                     month = "{:02d}".format(int(month)) # make the month has leading 0 if single digit
                     entity = list_of_texts[10].split(' : ')[-1]
 
-                pdf.close()
+                
                 old_file_directory = pathToPdfs + filename
                 new_name = entity + '-' + year + '-' + month + '-' + nomor_bupot+ '.pdf'
                 new_file_directory = pathToPdfs + new_name
@@ -126,7 +127,7 @@ for _, _, files in os.walk(pathToPdfs):
                 month = "{:02d}".format(int(month)) # make the month has leading 0 if single digit
                 name = list_of_texts[13].split(': ')[-1]
 
-                pdf.close()
+               
                 old_file_directory = pathToPdfs + filename
                 new_name = name + '-PPH23BUPOT-' + year + '-' + month + '-' + nomor_bupot + '.pdf'
                 new_file_directory = pathToPdfs + new_name
@@ -145,7 +146,7 @@ for _, _, files in os.walk(pathToPdfs):
                 month = "{:02d}".format(int(month)) # make the month has leading 0 if single digit
                 name = list_of_texts[12].split(': ')[-1]
 
-                pdf.close()
+                
                 old_file_directory = pathToPdfs + filename
                 new_name = name + '-PPH23BUPOT-' + year + '-' + month + '-' + nomor_bupot + '.pdf'
                 new_file_directory = pathToPdfs + new_name
@@ -166,7 +167,7 @@ for _, _, files in os.walk(pathToPdfs):
                 name = list_of_texts[11].split(': ')[-1]
                 firstTwelveLettersOfName = name.replace(' ','')[:12]
                 
-                pdf.close()
+                
                 old_file_directory = pathToPdfs + filename
                 # new_name = firstTwelveLettersOfName + '-PPH4(2)BUPOT-' + year + '-' + month + '-' + nomor_bupot + '.pdf'
                 new_name = firstTwelveLettersOfName + "_" +kode_pajak + "_" + year + '-' + month + '-' + nomor_bupot + '.pdf'
@@ -189,7 +190,7 @@ for _, _, files in os.walk(pathToPdfs):
                 firstTwelveLettersOfName = name.replace(' ','')[:12]
                 
                 
-                pdf.close()
+                
                 old_file_directory = pathToPdfs + filename
                 # new_name = firstTwelveLettersOfName + '-PPH4(2)BUPOT-' + year + '-' + month + '-' + nomor_bupot + '.pdf'
                 new_name = firstTwelveLettersOfName + "_" +kode_pajak + "_" + year + '-' + month + '-' + nomor_bupot + '.pdf'
@@ -208,7 +209,7 @@ for _, _, files in os.walk(pathToPdfs):
                 year = masa_pajak[1]
                 name = list_of_texts[7].split(': ')[-1]
                 
-                pdf.close()
+                
                 old_file_directory = pathToPdfs + filename
                 new_name = name + '-PPH21BUPOT-' + year + '-' + month + '.pdf'
                 new_file_directory = pathToPdfs + new_name
@@ -230,7 +231,7 @@ for _, _, files in os.walk(pathToPdfs):
                 name = list_of_texts[8].split(': ')[-1]
                 firstTwelveLettersOfName = name.replace(' ','')[:12]
                 
-                pdf.close()
+                
                 old_file_directory = pathToPdfs + filename
                 new_name = firstTwelveLettersOfName + "_" +kode_pajak + "_" + year + '-' + month + '-' + nomor_bupot + '.pdf'
                 new_file_directory = pathToPdfs + new_name
@@ -251,7 +252,7 @@ for _, _, files in os.walk(pathToPdfs):
                 name = list_of_texts[10].split(': ')[-1]
                 firstTwelveLettersOfName = name.replace(' ','')[:12]
                 
-                pdf.close()
+                
                 old_file_directory = pathToPdfs + filename
                 # new_name = firstTwelveLettersOfName + '-PPH4(2)BUPOT-' + year + '-' + month + '-' + nomor_bupot + '.pdf'
                 new_name = firstTwelveLettersOfName + "_" +kode_pajak + "_" + year + '-' + month + '-' + nomor_bupot + '.pdf'
@@ -273,7 +274,7 @@ for _, _, files in os.walk(pathToPdfs):
                 name = list_of_texts[8].split(': ')[-1]
                 # firstTwelveLettersOfName = name.replace(' ','')[:12]
                 
-                pdf.close()
+                
                 old_file_directory = pathToPdfs + filename
                 # new_name = firstTwelveLettersOfName + "_" +kode_pajak + "_" + year + '-' + month + '-' + nomor_bupot + '.pdf'
                 new_name = name + "-" + "PPH21BUPOT" + "-" + year + '-' + month + '-' + nomor_bupot + '.pdf'
@@ -291,7 +292,7 @@ for _, _, files in os.walk(pathToPdfs):
                 day,month,year = next((line for line in list_of_texts if 'KOTA ADM. JAKARTA UTARA, ' in line), None).split(', ')[1].split(" ")
                 month = month_name_to_number(month)
                 
-                pdf.close()
+                
                 old_file_directory = pathToPdfs + filename
                 new_name = tax_invoice_number + "-" + year + '-' + month + '-' + invoice_number + '.pdf'
                 new_file_directory = pathToPdfs + new_name
