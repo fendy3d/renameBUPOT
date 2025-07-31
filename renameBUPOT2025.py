@@ -9,7 +9,7 @@ userUnderstand = input("\n!!! WARNING !!!\nPlease make sure that all pdf in the 
 while userUnderstand != 'y':
     userUnderstand = input("\n!!! I REPEAT !!!\nPlease make sure that all pdf in the folder are ALL OF THE SAME TYPE.\nPress 'y' if you have done this.")    
 
-typeOfBupot = input("What BUPOT is this? Press\n'1' for BP21\n'2' for XXX \nAnswer: ")
+typeOfBupot = input("What BUPOT is this? Press\n'1' for BP21\n'2' for BPPU\n'3' for xxx \nAnswer: ")
 
 def printText(list_of_texts):
     counter = 0
@@ -48,18 +48,16 @@ for _, _, files in os.walk(pathToPdfs):
             pdf = pdfplumber.open(pathToPdfs + filename)
             num_pages = len(pdf.pages)
             list_of_texts = []
-            
-            if (typeOfBupot == '1'): # if it's BP21
-                
-                for page_number in range(num_pages):
-                    page = pdf.pages[page_number] # get the page
-                    texts = page.extract_text()
-                    list_of_texts += texts.split('\n')
-
+            for page_number in range(num_pages):
+                page = pdf.pages[page_number] # get the page
+                texts = page.extract_text()
+                list_of_texts += texts.split('\n')
                 list_of_texts = [item for item in list_of_texts if item and str(item).strip()] # remove all empty breakline
 
-                printText(list_of_texts)
+            printText(list_of_texts)
 
+            if (typeOfBupot == '1'): # if it's BP21
+                
                 name = list_of_texts[9].split(': ')[-1]
                 month, year = list_of_texts[6].split(' ')[1].split("-")
                 
@@ -69,6 +67,16 @@ for _, _, files in os.walk(pathToPdfs):
                 print(new_file_directory)
                 os.rename(old_file_directory, new_file_directory)
 
+            elif (typeOfBupot == '2'): # if it's BPPU
+
+                name = list_of_texts[9].split(': ')[-1]
+                month, year = list_of_texts[6].split(' ')[1].split("-")
+                
+                old_file_directory = pathToPdfs + filename
+                new_name = name + '-BPPU-' + year + '-' + month + '.pdf'
+                new_file_directory = pathToPdfs + new_name
+                print(new_file_directory)
+                os.rename(old_file_directory, new_file_directory)
 
             else:
                 print ("Code not updated yet. Contact Fendy.")
