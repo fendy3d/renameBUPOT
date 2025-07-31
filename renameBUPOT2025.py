@@ -55,6 +55,8 @@ for _, _, files in os.walk(pathToPdfs):
                     texts = page.extract_text()
                     list_of_texts += texts.split('\n')
 
+                printText(list_of_texts)
+                
                 name = list_of_texts[12].split(': ')[-1]
                 month, year = list_of_texts[8].split(' ')[1].split("-")
                 
@@ -64,7 +66,7 @@ for _, _, files in os.walk(pathToPdfs):
 
                 os.rename(old_file_directory, new_file_directory)
 
-                printText(list_of_texts)
+
             else:
                 print ("Code not updated yet. Contact Fendy.")
             
