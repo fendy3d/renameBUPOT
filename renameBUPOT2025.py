@@ -13,6 +13,7 @@ typeOfBupot = input("What BUPOT is this? Press\n'1' for BP21\n'2' for XXX \nAnsw
 
 def printText(list_of_texts):
     counter = 0
+    
     for text in list_of_texts:
         print(str(counter) + ": " + text)
         counter += 1
@@ -55,15 +56,17 @@ for _, _, files in os.walk(pathToPdfs):
                     texts = page.extract_text()
                     list_of_texts += texts.split('\n')
 
+                list_of_texts = [item for item in list_of_texts if item and str(item).strip()] # remove all empty breakline
+
                 printText(list_of_texts)
-                
-                name = list_of_texts[12].split(': ')[-1]
-                month, year = list_of_texts[8].split(' ')[1].split("-")
+
+                name = list_of_texts[9].split(': ')[-1]
+                month, year = list_of_texts[6].split(' ')[1].split("-")
                 
                 old_file_directory = pathToPdfs + filename
                 new_name = name + '-BP21-' + year + '-' + month + '.pdf'
                 new_file_directory = pathToPdfs + new_name
-
+                print(new_file_directory)
                 os.rename(old_file_directory, new_file_directory)
 
 
