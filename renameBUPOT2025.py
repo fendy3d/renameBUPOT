@@ -57,13 +57,14 @@ for _, _, files in os.walk(pathToPdfs):
 
                 name = list_of_texts[12].split(': ')[-1]
                 month, year = list_of_texts[8].split(' ')[1].split("-")
-               
+                
                 old_file_directory = pathToPdfs + filename
                 new_name = name + '-BP21-' + year + '-' + month + '.pdf'
                 new_file_directory = pathToPdfs + new_name
 
                 os.rename(old_file_directory, new_file_directory)
 
+                printText(list_of_texts)
             else:
                 print ("Code not updated yet. Contact Fendy.")
             
