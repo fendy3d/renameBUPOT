@@ -9,7 +9,7 @@ userUnderstand = input("\n!!! WARNING !!!\nPlease make sure that all pdf in the 
 while userUnderstand != 'y':
     userUnderstand = input("\n!!! I REPEAT !!!\nPlease make sure that all pdf in the folder are ALL OF THE SAME TYPE.\nPress 'y' if you have done this.")    
 
-typeOfBupot = input("What BUPOT is this? Press\n'1' for BP21\n'2' for BPPU\n'3' for xxx \nAnswer: ")
+typeOfBupot = input("What BUPOT is this? Press\n'1' for BP21\n'2' for BPPU (Made by UJK)\n'3' for BPPU (Made by customer) \nAnswer: ")
 
 def printText(list_of_texts):
     counter = 0
@@ -54,28 +54,45 @@ for _, _, files in os.walk(pathToPdfs):
                 list_of_texts += texts.split('\n')
                 list_of_texts = [item for item in list_of_texts if item and str(item).strip()] # remove all empty breakline
 
-            printText(list_of_texts)
+            # printText(list_of_texts)
 
             if (typeOfBupot == '1'): # if it's BP21
                 
                 name = list_of_texts[9].split(': ')[-1]
+                
+                document_number = list_of_texts[6].split(' ')[0]
                 month, year = list_of_texts[6].split(' ')[1].split("-")
                 
                 old_file_directory = pathToPdfs + filename
-                new_name = name + '-BP21-' + year + '-' + month + '.pdf'
+                new_name = name + '-BP21-' + year + '-' + month + '-' + document_number + '.pdf'
                 new_file_directory = pathToPdfs + new_name
-                print(new_file_directory)
+                
                 os.rename(old_file_directory, new_file_directory)
 
-            elif (typeOfBupot == '2'): # if it's BPPU
+            elif (typeOfBupot == '2'): # if it's BPPU (made by UJK)
 
-                name = list_of_texts[9].split(': ')[-1]
+                name = list_of_texts[9].split(': ')[-1] # Name of dipotong
+                
+                document_number = list_of_texts[6].split(' ')[0]
                 month, year = list_of_texts[6].split(' ')[1].split("-")
                 
                 old_file_directory = pathToPdfs + filename
-                new_name = name + '-BPPU-' + year + '-' + month + '.pdf'
+                new_name = year + '-' + month + '-' + '-BPPU-' + name + '_' + document_number + '.pdf'
                 new_file_directory = pathToPdfs + new_name
-                print(new_file_directory)
+                
+                os.rename(old_file_directory, new_file_directory)
+
+            elif (typeOfBupot == '3'): # if it's BPPU (made by customer)
+
+                name = list_of_texts[35].split(': ')[-1] # Name of dipotong
+                
+                document_number = list_of_texts[6].split(' ')[0]
+                month, year = list_of_texts[6].split(' ')[1].split("-")
+                
+                old_file_directory = pathToPdfs + filename
+                new_name = year + '-' + month + '-BPPU-' + name + '_' + document_number + '.pdf'
+                new_file_directory = pathToPdfs + new_name
+                
                 os.rename(old_file_directory, new_file_directory)
 
             else:
