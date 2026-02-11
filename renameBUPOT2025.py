@@ -9,7 +9,7 @@ userUnderstand = input("\n!!! WARNING !!!\nPlease make sure that all pdf in the 
 while userUnderstand != 'y':
     userUnderstand = input("\n!!! I REPEAT !!!\nPlease make sure that all pdf in the folder are ALL OF THE SAME TYPE.\nPress 'y' if you have done this.")    
 
-typeOfBupot = input("What BUPOT is this? Press\n'1' for BP21\n'2' for BPPU (Made by UJK)\n'3' for BPPU (Made by customer) \nAnswer: ")
+typeOfBupot = input("What BUPOT is this? Press\n'1' for BP21\n'2' for BPPU (Made by UJK)\n'3' for BPPU (Made by customer) \n'4' for SPT PPN \nAnswer: ")
 
 def printText(list_of_texts):
     counter = 0
@@ -56,6 +56,7 @@ for _, _, files in os.walk(pathToPdfs):
 
             # printText(list_of_texts)
 
+            pdf.close()
             if (typeOfBupot == '1'): # if it's BP21
                 
                 name = list_of_texts[9].split(': ')[-1]
@@ -95,8 +96,21 @@ for _, _, files in os.walk(pathToPdfs):
                 
                 os.rename(old_file_directory, new_file_directory)
 
+            elif (typeOfBupot == '4'): # if it's SPT PPN
+
+                # month, year = list_of_texts[6].split(' ')[0:1]
+                month, year = list_of_texts[6].split(' ')[0:2]
+                month = month_name_to_number(month)
+                
+                
+                old_file_directory = pathToPdfs + filename
+                new_name = year + '-' + month + '-SPT_PPN.pdf'
+                new_file_directory = pathToPdfs + new_name
+                
+                os.rename(old_file_directory, new_file_directory)
+
             else:
                 print ("Code not updated yet. Contact Fendy.")
             
-            pdf.close()
+            
             
