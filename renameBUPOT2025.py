@@ -9,7 +9,7 @@ userUnderstand = input("\n!!! WARNING !!!\nPlease make sure that all pdf in the 
 while userUnderstand != 'y':
     userUnderstand = input("\n!!! I REPEAT !!!\nPlease make sure that all pdf in the folder are ALL OF THE SAME TYPE.\nPress 'y' if you have done this.")    
 
-typeOfBupot = input("What BUPOT is this? Press\n'1' for BP21\n'2' for BPPU (Made by UJK)\n'3' for BPPU (Made by customer) \n'4' for SPT PPN \nAnswer: ")
+typeOfBupot = input("What BUPOT is this? Press\n'1' for BP21\n'2' for BPPU (Made by UJK)\n'3' for BPPU (Made by customer) \n'4' for SPT PPN\n'5' for FPK \nAnswer: ")
 
 def printText(list_of_texts):
     counter = 0
@@ -54,7 +54,7 @@ for _, _, files in os.walk(pathToPdfs):
                 list_of_texts += texts.split('\n')
                 list_of_texts = [item for item in list_of_texts if item and str(item).strip()] # remove all empty breakline
 
-            # printText(list_of_texts)
+            printText(list_of_texts)
 
             pdf.close()
             if (typeOfBupot == '1'): # if it's BP21
@@ -98,7 +98,6 @@ for _, _, files in os.walk(pathToPdfs):
 
             elif (typeOfBupot == '4'): # if it's SPT PPN
 
-                # month, year = list_of_texts[6].split(' ')[0:1]
                 month, year = list_of_texts[6].split(' ')[0:2]
                 month = month_name_to_number(month)
                 
@@ -106,6 +105,23 @@ for _, _, files in os.walk(pathToPdfs):
                 old_file_directory = pathToPdfs + filename
                 new_name = year + '-' + month + '-SPT_PPN.pdf'
                 new_file_directory = pathToPdfs + new_name
+                
+                os.rename(old_file_directory, new_file_directory)
+
+            elif (typeOfBupot == '5'): # if it's FPK
+                
+                document_number = list_of_texts[5].split(': ')[-1]
+                date = [item for item in list_of_texts if "KOTA ADM. JAKARTA UTARA" in item][-1]
+                
+                month, year = date.split(', ')[1].split(' ')[1:3]
+                month = month_name_to_number(month)
+                # reference_number = list_of_texts[39].split(': ')[-1].replace(')','')
+                reference_number = [item for item in list_of_texts if "(Referensi" in item][-1].split(': ')[-1].replace(')','')
+                                
+                old_file_directory = pathToPdfs + filename
+                new_name = year + '-' + month + '-' + document_number + '-' + reference_number +'.pdf'
+                new_file_directory = pathToPdfs + new_name
+                print(new_name)
                 
                 os.rename(old_file_directory, new_file_directory)
 
